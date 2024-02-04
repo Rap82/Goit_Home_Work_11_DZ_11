@@ -1148,6 +1148,161 @@
               # Все більше наш *class Vector стає схожий на звичайні вектори математичні.
               
 
+# class Point:
+#     def __init__(self, x, y):
+#         self.__x = None
+#         self.__y = None
+#         self.x = x
+#         self.y = y
+
+#     @property
+#     def x(self):
+#         return self.__x
+
+#     @x.setter
+#     def x(self, x):
+#         if (type(x) == int) or (type(x) == float):
+#             self.__x = x
+
+#     @property
+#     def y(self):
+#         return self.__y
+
+#     @y.setter
+#     def y(self, y):
+#         if (type(y) == int) or (type(y) == float):
+#             self.__y = y
+
+#     def __str__(self):
+#         return f"Point({self.x},{self.y})"
+
+
+# class Vector:
+#     def __init__(self, coordinates: Point):
+#         self.coordinates = coordinates
+
+#     def __setitem__(self, index, value):
+#         if index == 0:
+#             self.coordinates.x = value
+#         if index == 1:
+#             self.coordinates.y = value
+
+#     def __getitem__(self, index):
+#         if index == 0:
+#             return self.coordinates.x
+#         if index == 1:
+#             return self.coordinates.y
+
+#     def __call__(self, value=None):
+#         if value:
+#             self.coordinates.x = self.coordinates.x * value
+#             self.coordinates.y = self.coordinates.y * value
+#         return self.coordinates.x, self.coordinates.y
+
+#     def __add__(self, vector):
+#         x = self.coordinates.x + vector.coordinates.x
+#         y = self.coordinates.y + vector.coordinates.y
+#         return Vector(Point(x, y))
+
+#     def __sub__(self, vector):
+#         x = self.coordinates.x - vector.coordinates.x
+#         y = self.coordinates.y - vector.coordinates.y
+#         return Vector(Point(x, y))
+
+#     def __mul__(self, vector):
+#         return (
+#                 self.coordinates.x * vector.coordinates.x
+#                 + self.coordinates.y * vector.coordinates.y
+#         )
+
+#     def len(self):
+#         ''' Метод класу який обчислює довжину вектора(нашого екзепляру який має всі властивості вектора)
+#         за формулою  len == (x1 ** 2 + y1 ** 2) ** 0.5
+#         і повертає результат, число(тип *float або *int) , яке відповідає "довжині вектора" з параметрами вказаним в екзеплярі.'''
+
+#         len_vector = (self.coordinates.x** 2 + self.coordinates.y ** 2) ** 0.5 # В математичну формулу обчислення довжини вектора , 
+#                                                         #  піставляємо значення з полів *.coordinates.x i *.coordinates.y
+#         return len_vector  #  Повертаємо довжину вектора з методу. 
+
+#     def __str__(self):
+#         return f"Vector({self.coordinates.x},{self.coordinates.y})"
+
+# # +++++++++++++++++++++++++++++++++++++++++++ Тестові значення і виклик функції (не потрібний для автоперевірки.) +++++++
+    
+# vector1 = Vector(Point(1, 10))
+# vector2 = Vector(Point(10, 10))
+
+# print(vector1.len())  # 10.04987562112089
+# print(vector2.len())  # 14.142135623730951
+
+# ================================ Звдання 10 / Task 10 ======================================
+
+# =================  9. Перевизначення математичних операторів. Реалізація методу довжини вектора *len(self)  ======================
+
+# Операції порівняння, як і інші оператори, мають свої "магічні" методи:
+
+# __eq__(self, other) — визначає поведінку під час перевірки на відповідність (==).
+# __ne__(self, other) — визначає поведінку під час перевірки на невідповідність. !=.
+# __lt__(self, other) — визначає поведінку під час перевірки на менше <.
+# __gt__(self, other) — визначає поведінку під час перевірки на більше >.
+# __le__(self, other) — визначає поведінку під час перевірки на менше-дорівнює <=.
+# __ge__(self, other) — визначає поведінку під час перевірки на більше-дорівнює >=.
+# Якщо вам потрібно, щоб ваш об'єкт був порівнянний, 
+# ви можете реалізувати ці шість методів і тоді будь-яка перевірка на порівняння працюватиме:
+
+# class Point:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+
+#     def __eq__(self, other):
+#         return self.x == other.x and self.y == other.y
+
+#     def __ne__(self, other):
+#         return self.x != other.x or self.y != other.y
+
+#     def __lt__(self, other):
+#         return self.x < other.x and self.y < other.y
+
+#     def __gt__(self, other):
+#         return self.x > other.x and self.y > other.y
+
+#     def __le__(self, other):
+#         return self.x <= other.x and self.y <= other.y
+
+#     def __ge__(self, other):
+#         return self.x >= other.x and self.y >= other.y
+
+
+# Point(0, 0) == Point(0, 0)  # True
+# Point(0, 0) != Point(0, 0)  # False
+# Point(0, 0) < Point(1, 0)  # False
+# Point(0, 0) > Point(0, 1)  # False
+# Point(0, 2) >= Point(0, 1)  # True
+# Point(0, 0) <= Point(0, 0)  # True
+
+# ++++++++++++++++++++++++++++++++++++++  Умова / Condition ++++++++++++++++++++++++++++++++++++++++
+
+# Реалізуйте всі методи порівняння для класу Vector.
+# З метою спрощення порівнювати екземпляри класу Vector будемо тільки за їх довжиною, використовуючи метод len, 
+# не враховуючи напрямок векторів.
+
+# Приклад коду:
+
+# vector1 = Vector(Point(1, 10))
+# vector2 = Vector(Point(3, 10))
+
+# print(vector1 == vector2)  # False
+# print(vector1 != vector2)  # True
+# print(vector1 > vector2)  # False
+# print(vector1 < vector2)  # True
+# print(vector1 >= vector2)  # False
+# print(vector1 <= vector2)  # True
+
+# +++++++++++++++++++++++++++++++++++++   Код / Code ++++++++++++++++++++++++++++++++++++++++
+# Примітка :  І з нового тут тільки реаліація магічних методів порівння .Все інше читай в попердніх завданнях.
+              # Все більше наш *class Vector стає схожий на звичайні вектори математичні.
+
 class Point:
     def __init__(self, x, y):
         self.__x = None
@@ -1216,21 +1371,64 @@ class Vector:
         )
 
     def len(self):
-        ''' Метод класу який обчислює довжину вектора(нашого екзепляру який має всі властивості вектора)
-        за формулою  len == (x1 ** 2 + y1 ** 2) ** 0.5
-        і повертає результат, число(тип *float або *int) , яке відповідає "довжині вектора" з параметрами вказаним в екзеплярі.'''
-
-        len_vector = (self.coordinates.x** 2 + self.coordinates.y ** 2) ** 0.5 # В математичну формулу обчислення довжини вектора , 
-                                                        #  піставляємо значення з полів *.coordinates.x i *.coordinates.y
-        return len_vector  #  Повертаємо довжину вектора з методу. 
+        return (self.coordinates.x ** 2 + self.coordinates.y ** 2) ** 0.5
 
     def __str__(self):
         return f"Vector({self.coordinates.x},{self.coordinates.y})"
 
-# +++++++++++++++++++++++++++++++++++++++++++ Тестові значення і виклик функції (не потрібний для автоперевірки.) +++++++
-    
-vector1 = Vector(Point(1, 10))
-vector2 = Vector(Point(10, 10))
+    def __eq__(self, vector):
+        ''' Магічний метод перевизначення рівності.
+         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+         '''
+        return  vector.len() == self.len()
+        
+        
 
-print(vector1.len())  # 10.04987562112089
-print(vector2.len())  # 14.142135623730951
+    def __ne__(self, vector):
+        ''' Магічний метод перевизначення нерівності.
+         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+         '''
+        return  vector.len() != self.len() 
+        
+
+    def __lt__(self, vector):
+        ''' Магічний метод перевизначення знак менше '<' .
+         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+         '''
+        print(self.len(), vector.len())     
+        return   self.len() < vector.len()
+
+    def __gt__(self, vector):
+        ''' Магічний метод перевизначення знак більше '>' .
+         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+         '''
+        print(self.len(), vector.len()) 
+        return  self.len() > vector.len() 
+        
+
+    def __le__(self, vector):
+        ''' Магічний метод перевизначення знак менше-рівне '<=' .
+         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+         '''
+        return  self.len() <= vector.len()
+        
+
+    def __ge__(self, vector):
+        ''' Магічний метод перевизначення знак більше-рівне '>=' .
+         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+         '''
+        return  self.len() >= vector.len()  
+
+
+
+# # +++++++++++++++++++++++++++++++++++++++++++ Тестові значення і виклик функції (не потрібний для автоперевірки.) +++++++
+        
+vector1 = Vector(Point(1, 10))
+vector2 = Vector(Point(3, 10))
+
+print(vector1 == vector2)  # False
+print(vector1 != vector2)  # True
+print(vector1 > vector2)  # False
+print(vector1 < vector2)  # True
+print(vector1 >= vector2)  # False
+print(vector1 <= vector2)  # True
