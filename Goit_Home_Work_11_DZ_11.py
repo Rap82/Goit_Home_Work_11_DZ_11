@@ -1024,98 +1024,103 @@
 # Аналогічно методу *__mul__(self,*інший_екзепляр) Працють всі інші магічні методи математичних символів(і мабудь не тільки матиматичних)
     # По факту імя магічного методу в Пайтон виступає просто як математичний символ  
 
-class Point:
-    def __init__(self, x, y):
-        self.__x = None
-        self.__y = None
-        self.x = x
-        self.y = y
+# class Point:
+#     def __init__(self, x, y):
+#         self.__x = None
+#         self.__y = None
+#         self.x = x
+#         self.y = y
 
-    @property
-    def x(self):
-        return self.__x
+#     @property
+#     def x(self):
+#         return self.__x
 
-    @x.setter
-    def x(self, x):
-        if (type(x) == int) or (type(x) == float):
-            self.__x = x
+#     @x.setter
+#     def x(self, x):
+#         if (type(x) == int) or (type(x) == float):
+#             self.__x = x
 
-    @property
-    def y(self):
-        return self.__y
+#     @property
+#     def y(self):
+#         return self.__y
 
-    @y.setter
-    def y(self, y):
-        if (type(y) == int) or (type(y) == float):
-            self.__y = y
+#     @y.setter
+#     def y(self, y):
+#         if (type(y) == int) or (type(y) == float):
+#             self.__y = y
 
-    def __str__(self):
-        return f"Point({self.x},{self.y})"
+#     def __str__(self):
+#         return f"Point({self.x},{self.y})"
 
 
-class Vector:
-    def __init__(self, coordinates: Point):
-        self.coordinates = coordinates
+# class Vector:
+#     def __init__(self, coordinates: Point):
+#         self.coordinates = coordinates
 
-    def __setitem__(self, index, value):
-        if index == 0:
-            self.coordinates.x = value
-        if index == 1:
-            self.coordinates.y = value
+#     def __setitem__(self, index, value):
+#         if index == 0:
+#             self.coordinates.x = value
+#         if index == 1:
+#             self.coordinates.y = value
 
-    def __getitem__(self, index):
-        if index == 0:
-            return self.coordinates.x
-        if index == 1:
-            return self.coordinates.y
+#     def __getitem__(self, index):
+#         if index == 0:
+#             return self.coordinates.x
+#         if index == 1:
+#             return self.coordinates.y
 
-    def __call__(self, value=None):
-        if value:
-            self.coordinates.x = self.coordinates.x * value
-            self.coordinates.y = self.coordinates.y * value
-        return self.coordinates.x, self.coordinates.y
+#     def __call__(self, value=None):
+#         if value:
+#             self.coordinates.x = self.coordinates.x * value
+#             self.coordinates.y = self.coordinates.y * value
+#         return self.coordinates.x, self.coordinates.y
 
-    def __add__(self, vector):
-        x = self.coordinates.x + vector.coordinates.x
-        y = self.coordinates.y + vector.coordinates.y
-        return Vector(Point(x, y))
+#     def __add__(self, vector):
+#         x = self.coordinates.x + vector.coordinates.x
+#         y = self.coordinates.y + vector.coordinates.y
+#         return Vector(Point(x, y))
 
-    def __sub__(self, vector):
-        x = self.coordinates.x - vector.coordinates.x
-        y = self.coordinates.y - vector.coordinates.y
-        return Vector(Point(x, y))
+#     def __sub__(self, vector):
+#         x = self.coordinates.x - vector.coordinates.x
+#         y = self.coordinates.y - vector.coordinates.y
+#         return Vector(Point(x, y))
 
-    def __mul__(self, vector):
-        ''' Магічний метод множеня екзеплярів (*), Де *self - перший множник , а *vector - другий множник.
-#         *Примітка : Доцільніше для аргументів що передаються, замість імені *vector викоритовувати імя - *ohers(інші).(для себе)
-#             В нашій реалізації будемо не просто множити між собою значення одноіменних полів екзеплярів, а ще й додавати результат між собою.
-              оскільки нам потрібно , при множені екзеплярів, повертати число яке буде *скалярним добутком векторів, 
-              а не просто добутком полів.'''
+#     def __mul__(self, vector):
+#         ''' Магічний метод множеня екзеплярів (*), Де *self - перший множник , а *vector - другий множник.
+# #         *Примітка : Доцільніше для аргументів що передаються, замість імені *vector викоритовувати імя - *ohers(інші).(для себе)
+# #             В нашій реалізації будемо не просто множити між собою значення одноіменних полів екзеплярів, а ще й додавати результат між собою.
+#               оскільки нам потрібно , при множені екзеплярів, повертати число яке буде *скалярним добутком векторів, 
+#               а не просто добутком полів.'''
 
-        x = self.coordinates.x * vector.coordinates.x # Присвоюємо якійсь змінній *x, добуток полів *.coordinates.x  Першого(множник1) і Другого(множник2) екзепляру класу *Vector
-        y = self.coordinates.y * vector.coordinates.y # Присвоюємо якійсь змінній *y, добуток полів *.coordinates.y  Першого(множник1) і Другого(множник2) екзепляру класу *Vector
-        scalar_dobutok_vectoriv = x + y # Шукаємо скалярний добуток наших векторі(екзеплярів) . 
-                            # Математична формула: Якщо a(x1; y1) і b(x2; y2), то a*b = (x1*x2) + (y1*y2) 
-                            #  де a*b - число що є скалярним добутком двох векторів.
-        return scalar_dobutok_vectoriv # Повертаємо число - скалярний добуток .
+#         x = self.coordinates.x * vector.coordinates.x # Присвоюємо якійсь змінній *x, добуток полів *.coordinates.x  Першого(множник1) і Другого(множник2) екзепляру класу *Vector
+#         y = self.coordinates.y * vector.coordinates.y # Присвоюємо якійсь змінній *y, добуток полів *.coordinates.y  Першого(множник1) і Другого(множник2) екзепляру класу *Vector
+#         scalar_dobutok_vectoriv = x + y # Шукаємо скалярний добуток наших векторі(екзеплярів) . 
+#                             # Математична формула: Якщо a(x1; y1) і b(x2; y2), то a*b = (x1*x2) + (y1*y2) 
+#                             #  де a*b - число що є скалярним добутком двох векторів.
+#         return scalar_dobutok_vectoriv # Повертаємо число - скалярний добуток .
         
 
-    def __str__(self):
-        return f"Vector({self.coordinates.x},{self.coordinates.y})"
+#     def __str__(self):
+#         return f"Vector({self.coordinates.x},{self.coordinates.y})"
 
- # # +++++++++++++++++++++++++++++++++++++++++++ Тестові значення і виклик функції (не потрібний для автоперевірки.) +++++++++++
+#  # # +++++++++++++++++++++++++++++++++++++++++++ Тестові значення і виклик функції (не потрібний для автоперевірки.) +++++++++++
 
-vector1 = Vector(Point(1, 10))  # Створення конкретного екзепляру класу *Vector з іменем *vector1 
-                                # який в полі *coordinates  буде містити  екзепляр класу *Point шаблону *Point(x,y)
-                                # В нашому випадку: поле *x == 1 а поле *y == 10
+# vector1 = Vector(Point(1, 10))  # Створення конкретного екзепляру класу *Vector з іменем *vector1 
+#                                 # який в полі *coordinates  буде містити  екзепляр класу *Point шаблону *Point(x,y)
+#                                 # В нашому випадку: поле *x == 1 а поле *y == 10
 
-vector2 = Vector(Point(9, 20))  # Створення конкретного екзепляру класу *Vector з іменем *vector2 
-                                # який в полі *coordinates  буде містити  екзепляр класу *Point шаблону *Point(x,y)
-                                # В нашому випадку: поле *x == 9 а поле *y == 20
+# vector2 = Vector(Point(9, 20))  # Створення конкретного екзепляру класу *Vector з іменем *vector2 
+#                                 # який в полі *coordinates  буде містити  екзепляр класу *Point шаблону *Point(x,y)
+#                                 # В нашому випадку: поле *x == 9 а поле *y == 20
 
-scalar = vector2 * vector1  # Оскільки наші екзепляри, мають себе поводити, як справжні математичні Вектори,
-                            # то й їх добуток має повертати число що буде скалярним добутком двох векторів.
-            # Математична формула дубутку двох векторів *a(x1; y1) i *b(x2; y2): 
-                # Якщо a(x1; y1) і b(x2; y2), то a*b = (x1*x2) + (y1*y2) - де a*b - число що є скалярним добутком двох векторів.
+# scalar = vector2 * vector1      # Оскільки наші екзепляри, мають себе поводити як справжні математичні Вектори,
+#                                 # то й їх добуток має повертати число що буде скалярним добутком двох векторів.
+#             # Математична формула дубутку двох векторів *a(x1; y1) i *b(x2; y2): 
+#                 # Якщо a(x1; y1) і b(x2; y2), то a*b = (x1*x2) + (y1*y2) - де a*b - число що є скалярним добутком двох векторів.
 
-print(scalar)  # 209
+# print(scalar) # 209
+
+# ================================ Звдання 9 / Task 9 ======================================
+
+# =================  9. Перевизначення математичних операторів. Реалізація методу довжини вектора *len(self)  ======================
+
