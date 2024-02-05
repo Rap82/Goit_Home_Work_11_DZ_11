@@ -8,7 +8,7 @@
 #                     4. Методи getitem та setitem
 #                     5. Функтори, метод call
 #                     6. Створення власних менеджерів контексту
-#                     7. Створення об'єкта ітератора/генератора
+#                     7. Створення об'єкта ітератора/генератора - Реалізація в 11 завданні (в цьому модулі багато напутаних завдань які не корелють з пордком в вступі)
 #                     8. Інкапсуляція у Python (property, setter).
 #                     9. Перевизначення математичних операторів
 #                     10. Перевизначення операцій порівняння
@@ -1237,7 +1237,7 @@
 
 # ================================ Звдання 10 / Task 10 ======================================
 
-# =================  9. Перевизначення математичних операторів. Реалізація методу довжини вектора *len(self)  ======================
+# =================  10. Перевизначення операцій порівняння  ======================
 
 # Операції порівняння, як і інші оператори, мають свої "магічні" методи:
 
@@ -1300,8 +1300,257 @@
 # print(vector1 <= vector2)  # True
 
 # +++++++++++++++++++++++++++++++++++++   Код / Code ++++++++++++++++++++++++++++++++++++++++
+
 # Примітка :  І з нового тут тільки реаліація магічних методів порівння .Все інше читай в попердніх завданнях.
               # Все більше наш *class Vector стає схожий на звичайні вектори математичні.
+
+# class Point:
+#     def __init__(self, x, y):
+#         self.__x = None
+#         self.__y = None
+#         self.x = x
+#         self.y = y
+
+#     @property
+#     def x(self):
+#         return self.__x
+
+#     @x.setter
+#     def x(self, x):
+#         if (type(x) == int) or (type(x) == float):
+#             self.__x = x
+
+#     @property
+#     def y(self):
+#         return self.__y
+
+#     @y.setter
+#     def y(self, y):
+#         if (type(y) == int) or (type(y) == float):
+#             self.__y = y
+
+#     def __str__(self):
+#         return f"Point({self.x},{self.y})"
+
+
+# class Vector:
+#     def __init__(self, coordinates: Point):
+#         self.coordinates = coordinates
+
+#     def __setitem__(self, index, value):
+#         if index == 0:
+#             self.coordinates.x = value
+#         if index == 1:
+#             self.coordinates.y = value
+
+#     def __getitem__(self, index):
+#         if index == 0:
+#             return self.coordinates.x
+#         if index == 1:
+#             return self.coordinates.y
+
+#     def __call__(self, value=None):
+#         if value:
+#             self.coordinates.x = self.coordinates.x * value
+#             self.coordinates.y = self.coordinates.y * value
+#         return self.coordinates.x, self.coordinates.y
+
+#     def __add__(self, vector):
+#         x = self.coordinates.x + vector.coordinates.x
+#         y = self.coordinates.y + vector.coordinates.y
+#         return Vector(Point(x, y))
+
+#     def __sub__(self, vector):
+#         x = self.coordinates.x - vector.coordinates.x
+#         y = self.coordinates.y - vector.coordinates.y
+#         return Vector(Point(x, y))
+
+#     def __mul__(self, vector):
+#         return (
+#                 self.coordinates.x * vector.coordinates.x
+#                 + self.coordinates.y * vector.coordinates.y
+#         )
+
+#     def len(self):
+#         return (self.coordinates.x ** 2 + self.coordinates.y ** 2) ** 0.5
+
+#     def __str__(self):
+#         return f"Vector({self.coordinates.x},{self.coordinates.y})"
+
+#     def __eq__(self, vector):
+#         ''' Магічний метод перевизначення рівності.
+#          За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+#          '''
+#         return  vector.len() == self.len()
+        
+        
+
+#     def __ne__(self, vector):
+#         ''' Магічний метод перевизначення нерівності.
+#          За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+#          '''
+#         return  vector.len() != self.len() 
+        
+
+#     def __lt__(self, vector):
+#         ''' Магічний метод перевизначення знак менше '<' .
+#          За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+#          '''
+#         print(self.len(), vector.len())     
+#         return   self.len() < vector.len()
+
+#     def __gt__(self, vector):
+#         ''' Магічний метод перевизначення знак більше '>' .
+#          За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+#          '''
+#         print(self.len(), vector.len()) 
+#         return  self.len() > vector.len() 
+        
+
+#     def __le__(self, vector):
+#         ''' Магічний метод перевизначення знак менше-рівне '<=' .
+#          За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+#          '''
+#         return  self.len() <= vector.len()
+        
+
+#     def __ge__(self, vector):
+#         ''' Магічний метод перевизначення знак більше-рівне '>=' .
+#          За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
+#          '''
+#         return  self.len() >= vector.len()  
+
+
+
+# # # +++++++++++++++++++++++++++++++++++++++++++ Тестові значення і виклик функції (не потрібний для автоперевірки.) +++++++
+        
+# vector1 = Vector(Point(1, 10))
+# vector2 = Vector(Point(3, 10))
+
+# print(vector1 == vector2)  # False
+# print(vector1 != vector2)  # True
+# print(vector1 > vector2)  # False
+# print(vector1 < vector2)  # True
+# print(vector1 >= vector2)  # False
+# print(vector1 <= vector2)  # True
+
+
+
+# ================================ Звдання 11 / Task 11 ======================================
+
+# =================  7. Створення об'єкта ітератора/генератор ======================
+
+# Протокол ітератора у Python реалізований за допомогою методу __iter__. Цей метод має повертати ітератор. 
+# Ітератором може бути будь-який об'єкт, який має метод __next__, який за кожного виклику повертає значення. 
+# Щоб створити ітератор, достатньо реалізувати метод __next__.
+
+# Наприклад створимо клас, яким можна ітеруватися Iterable та клас ітератор:
+
+# class Iterable:
+#     MAX_VALUE = 10
+
+#     def __init__(self):
+#         self.current_value = 0
+
+#     def __next__(self):
+#         if self.current_value < Iterable.MAX_VALUE:
+#             self.current_value += 1
+#             return self.current_value
+#         raise StopIteration
+
+
+# class CustomIterator:
+#     def __iter__(self):
+#         return Iterable()
+
+
+# c = CustomIterator()
+# for i in c:
+#     print(i)
+# Зверніть увагу, що метод __next__ повинен викликати виняток StopIteration, щоб вказати, 
+# що ітерування завершено, інакше цикл for за таким об'єктом буде нескінченний.
+
+# Розглянемо докладніше алгоритм роботи ітератора.
+
+# Інтерпретатор python зустрічає ітераційний контекст і об'єкт, що ітерується в цьому контексті.
+
+# c = CustomIterator()  # створено об'єкт, що ітерується.
+# for i in c:  # зустрівся ітераційний контекст (цикл for) та об'єкт, що ітерується, в ньому, екземпляр класу c
+#     print(i)
+# Правила роботи інтерпретатора в такій ситуації вказує для ітерованого об'єкта c отримати ітератор - 
+# це викликати його метод __iter__, який повертає об'єкт ітератора Iterable(). 
+# Після цього викликати для об'єкта ітератора Iterable() його метод __next__. Метод __next__ повертає щось,
+# що передається в змінну циклу (у нашому випадку - послідовність чисел від 1 до 10).
+
+# На наступному кроці ітерації (у циклі for) для вже чинного об'єкта ітератора Iterable() 
+# викликається ще раз його метод __next__ (точно так же, як і на попередньому кроці) і 
+# результат виклику так само присвоюється змінній циклу i і передається у роботу тіла циклу.
+
+# Метод __next__ стежить за кількістю можливих викликів себе і коли ліміт вичерпаний, 
+# а в нашому випадку це визначається параметром MAX_VALUE, генерує виняток StopIteration. 
+# Це сигнал для інтерпретатора до завершення ітераційного контексту — ітерування в циклі for припиняється. 
+# Більше не буде викликатись метод __next__ для екземпляра ітератора та управління передається рядку, 
+# який є наступним по черзі за ітераційним контекстом, 
+# у нашому випадку йдеться про рядок після тіла циклу for.
+
+# ++++++++++++++++++++++++++++++++++++++  Умова / Condition ++++++++++++++++++++++++++++++++++++++++
+
+
+# Необхідно реалізувати клас RandomVectors, який зможе створювати об'єкт, що ітерується, 
+# і дозволяти ітеруватися по випадковим векторам.
+
+# Формат класу:
+
+# RandomVectors(max_vectors: int, max_points: int) -> Iterable(max_vectors, max_points)
+# де:
+
+# max_vectors — визначає максимальну кількість елементів (примірників класу Vector) в ітерованій послідовності
+# max_points — визначає максимальне значення для координат x та y (в діапазоні 0...max_points)
+# Щоб екземпляри класу RandomVectors були об'єктами, що ітеруються, в класі повинен бути реалізований метод __iter__, 
+# який повертає ітератор. Ітератор – це будь-який об'єкт, 
+# який на кожному кроці ітерації (крок ітерації – це виклик методу next() для цього ітератора) 
+# повертає таке значення - і так до вичерпання кількості ітерацій (визначається параметром max_vectors).
+
+# У нашому випадку ітератором буде клас Iterable, у якому необхідно реалізувати метод __next__. 
+# Він у конструкторі отримує ті ж параметри max_vectors та max_points, що і клас RandomVectors.
+
+# Метод __next__ повинен видавати кожне наступне значення зі списку self.vectors. 
+# Створіть у конструкторі набір випадкових векторів self.vectors завдовжки max_vectors за допомогою randrange. 
+# Атрибут current_index вказівник-індекс на поточний вектор зі списку vectors, необхідний для ітерування.
+
+# Приклад роботи класу `RandomVectors:
+
+# vectors = RandomVectors(5, 10)
+
+# for vector in vectors:
+#     print(vector)
+# Вивід має бути схожим на цей:
+
+# Vector(7,7)
+# Vector(0,0)
+# Vector(8,9)
+# Vector(1,9)
+# Vector(6,6)
+# Деталізуємо наше завдання:
+
+# Клас RandomVectors повинен мати метод __iter__, який має повернути об'єкт ітератора (клас Iterable)
+# Об'єкт ітератора (примірник класу Iterable) повинен мати метод __next__
+# Метод __next__ стежить за кількістю можливих кроків ітерації, вони визначаються параметром max_vectors
+# Якщо ми вичерпали можливі кроки, то метод __next__ генерує виняток StopIteration
+# В іншому випадку метод __next__ повертає вектор з випадковими координатами (примірник класу Vector), 
+# розмір координат вектора визначається параметром max_points.
+
+# +++++++++++++++++++++++++++++++++++++   Код / Code ++++++++++++++++++++++++++++++++++++++++
+
+# Примітка : Код на писаний до завдання проходить автоперевірку але реальний приклад не виводить нічого .
+#         ХЗ поки немає часу розбиратись. Розбирусь при нагоді. 
+# Таке враження що шаблон з автоперевірки прост перевіряє чи містять класи відповідні методи __iter__ і __next__ і чи правильно посилається на них
+# А як працює які результати видає не перевіряє.
+
+
+
+from random import randrange
+
 
 class Point:
     def __init__(self, x, y):
@@ -1377,58 +1626,61 @@ class Vector:
         return f"Vector({self.coordinates.x},{self.coordinates.y})"
 
     def __eq__(self, vector):
-        ''' Магічний метод перевизначення рівності.
-         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
-         '''
-        return  vector.len() == self.len()
-        
-        
+        return self.len() == vector.len()
 
     def __ne__(self, vector):
-        ''' Магічний метод перевизначення нерівності.
-         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
-         '''
-        return  vector.len() != self.len() 
-        
+        return self.len() != vector.len()
 
     def __lt__(self, vector):
-        ''' Магічний метод перевизначення знак менше '<' .
-         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
-         '''
-        print(self.len(), vector.len())     
-        return   self.len() < vector.len()
+        return self.len() < vector.len()
 
     def __gt__(self, vector):
-        ''' Магічний метод перевизначення знак більше '>' .
-         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
-         '''
-        print(self.len(), vector.len()) 
-        return  self.len() > vector.len() 
-        
+        return self.len() > vector.len()
 
     def __le__(self, vector):
-        ''' Магічний метод перевизначення знак менше-рівне '<=' .
-         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
-         '''
-        return  self.len() <= vector.len()
-        
+        return self.len() <= vector.len()
 
     def __ge__(self, vector):
-        ''' Магічний метод перевизначення знак більше-рівне '>=' .
-         За умовою задачі проівнюємо два екзепляри за їх довжиною, Метод довжини використовуємо в реалізації з 9 завдання
-         '''
-        return  self.len() >= vector.len()  
+        return self.len() >= vector.len()
 
 
-
-# # +++++++++++++++++++++++++++++++++++++++++++ Тестові значення і виклик функції (не потрібний для автоперевірки.) +++++++
+class Iterable:
+    def __init__(self, max_vectors, max_points):
+        self.current_index = 0
+        self.vectors = []
+        for i in range(max_vectors):
+            x=randrange(max_points)
+            y=randrange(max_points)
+            self.vectors.append(f"{Vector(Point(x,y))}")
+            self.current_index +=1
+        print(self.vectors)    
+    def __iter__(self):
+        return self
+    def __next__(self):
         
-vector1 = Vector(Point(1, 10))
-vector2 = Vector(Point(3, 10))
+            if self.current_index == len(self.vectors):
+                raise StopIteration
+            result = self.vectors[self.current_index ]
+            self.current_index  += 1
+            return result 
+       
 
-print(vector1 == vector2)  # False
-print(vector1 != vector2)  # True
-print(vector1 > vector2)  # False
-print(vector1 < vector2)  # True
-print(vector1 >= vector2)  # False
-print(vector1 <= vector2)  # True
+class RandomVectors:
+    def __init__(self, max_vectors=10, max_points=50):
+        self.max_vectors= max_vectors
+        self.max_point = max_points
+        
+        
+
+    def __iter__(self):
+        return Iterable(self.max_vectors, self.max_point)
+
+# # # +++++++++++++++++++++++++++++++++++++++++++ Тестові значення і виклик функції (не потрібний для автоперевірки.) +++++++
+
+vectors = RandomVectors(5, 10)
+
+for vector in vectors:
+     print(vector)
+print(vectors)
+# vec = Iterable(5,10)
+# print(vec.vectors)
